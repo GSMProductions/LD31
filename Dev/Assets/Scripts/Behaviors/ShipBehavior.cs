@@ -130,6 +130,7 @@ public class ShipBehavior : MonoBehaviour {
             ship[x,1].GiveDropTarget(roomUnitySize);
 
             GameObject newRoom = GenerateRoom();
+            newRoom.GetComponent<RoomBehavior>().ship = this;
             newRoom.transform.parent = transform;
 
             newPosition.y += roomUnitySize*2;
@@ -142,8 +143,26 @@ public class ShipBehavior : MonoBehaviour {
     }
 
     public static GameObject GenerateRoom() {
-        string name = "room4";
-        return Instantiate(Resources.Load(name, typeof(GameObject))) as GameObject;
+        string[] name = new string[12] {"roomS", 
+                                       "roomES",
+                                       "roomES",
+                                       "roomEW",
+                                       "roomEW",
+                                       "roomESW",
+                                       "roomESW",
+                                       "roomESW",
+                                       "roomNESW",
+                                       "roomNESW",
+                                       "roomNESW",
+                                       "roomNESW",
+                                   };
+        int rotations = Random.Range(0,4);
+        GameObject room = Instantiate(Resources.Load(name[Random.Range(0,name.Length)], typeof(GameObject))) as GameObject;
+        for (int r = 0; r < rotations; r++) {
+            room.GetComponent<RoomBehavior>().RotationEffect(Sens.clockwise);
+        }
+        room.transform.eulerAngles = new Vector3(0f, 0f, -90*rotations);
+        return room;
     }
 
     public bool OnDropping()

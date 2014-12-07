@@ -28,11 +28,15 @@ public class SystemManager : MonoBehaviour {
                 newRoom.transform.parent = go_rooms.transform;
                 newRoom.transform.position = new Vector3((index_x -1) * roomUnitySize, (index_y - 1) * roomUnitySize, 0f);
                 go_rooms.GetComponent<ShipBehavior>().ship[(int)index_x,(int)index_y] = newRoom.GetComponent<RoomBehavior>();
+                newRoom.GetComponent<RoomBehavior>().ship = go_rooms.GetComponent<ShipBehavior>();
+                newRoom.GetComponent<RoomBehavior>().x = (int)index_x;
+                newRoom.GetComponent<RoomBehavior>().y = (int)index_y;
             }
         }
         GameObject hero = HeroBehavior.GiveHero();
         go_rooms.GetComponent<ShipBehavior>().ship[0,0].AddHeroOnRoom(hero.GetComponent<HeroBehavior>());
         go_rooms.GetComponent<ShipBehavior>().hero = hero.GetComponent<HeroBehavior>();
+        hero.GetComponent<HeroBehavior>().ship = go_rooms.GetComponent<ShipBehavior>();
 
         hero.GetComponent<HeroBehavior>().PositionOnRoom(go_rooms.GetComponent<ShipBehavior>().ship[0,0].transform.position);
     }

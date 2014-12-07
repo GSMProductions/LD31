@@ -33,6 +33,11 @@ public class RoomBehavior : MonoBehaviour {
     public float arriving_speed = 20f;
     public float initial_drop_speed = 2f;
 
+    public int x;
+    public int y;
+
+    public ShipBehavior ship;
+
     // Use this for initialization
     public void Start () {
         
@@ -126,5 +131,9 @@ public class RoomBehavior : MonoBehaviour {
     // Update is called once per frame
     public void Update () {
         Dropping();
+    }
+
+    public void OnMouseUp() {
+        ship.hero.roomClicked = this;
     }
 }

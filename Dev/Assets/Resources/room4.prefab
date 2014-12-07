@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400000}
+  - 61: {fileID: 6100000}
   m_Layer: 0
   m_Name: room4
   m_TagString: Untagged
@@ -116,6 +117,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_Mesh: {fileID: 4300000, guid: 46d293c4013f9f54280d30ea436a3027, type: 3}
+--- !u!61 &6100000
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: 2.55999994, y: 2.55999994}
+  m_Center: {x: 0, y: 0}
 --- !u!64 &6400000
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -162,6 +174,16 @@ MonoBehaviour:
   yTarget: 0
   dropTolerance: .400000006
   heroIsHere: 0
+  monsterIsHere: 0
+  hero: {fileID: 0}
+  opening: 01010101
+  dying: 0
+  dying_rotation_speed: 25
+  dying_rotation_direction: 1
+  arriving: 0
+  arriving_speed: 20
+  initial_drop_speed: 10
+  ship: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

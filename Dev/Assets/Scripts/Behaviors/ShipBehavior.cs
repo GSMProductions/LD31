@@ -78,6 +78,8 @@ public class ShipBehavior : MonoBehaviour {
 
             for (int index = 0; index < collect.Count && !placed; index++) {
                 ship[index/3,index%3] = collect[index];
+                collect[index].x = index/3;
+                collect[index].y = index%3;
             }
         }
 
@@ -157,7 +159,7 @@ public class ShipBehavior : MonoBehaviour {
             return onDrop;
         }
 
-    public List<Vector2> FindPath(int x1, int y1, int x2, int y2) {
+    public List<RoomBehavior> FindPath(int x1, int y1, int x2, int y2) {
         int [,] map = new int[3,3];
         for (int mx = 0; mx < 3 ; mx++) {
             for (int my = 0; my < 3 ; my++) {
@@ -205,7 +207,7 @@ public class ShipBehavior : MonoBehaviour {
             }
         }
 
-        List<Vector2> path = new List<Vector2>();
+        List<RoomBehavior> path = new List<RoomBehavior>();
 
         if (!found) {
             return null;
@@ -241,7 +243,7 @@ public class ShipBehavior : MonoBehaviour {
                     }
                 }
             }
-            path.Add(new Vector2((int)px,(int)py));
+            path.Add(ship[(int)px,(int)py]);
             x = px;
             y = py;
         }

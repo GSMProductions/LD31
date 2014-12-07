@@ -305,4 +305,5 @@ MonoBehaviour:
   targetRotation: 0
   rotationSens: 1
   rotationTolerance: 2
+  rotation_sinus_amplitude: 1
   hero: {fileID: 0}

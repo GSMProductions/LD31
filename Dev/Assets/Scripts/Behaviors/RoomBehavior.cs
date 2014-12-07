@@ -24,6 +24,9 @@ public class RoomBehavior : MonoBehaviour {
     public bool dying = false;
     public float dying_rotation_speed = 25f;
     public float dying_rotation_direction = 1.0f;
+    public bool arriving = false;
+    public float arriving_speed = 20f;
+    public float initial_drop_speed = 2f;
 
     // Use this for initialization
     public void Start () {
@@ -57,10 +60,11 @@ public class RoomBehavior : MonoBehaviour {
                 newPosition = transform.position;
                 newPosition.y = yTarget;
                 transform.position =  newPosition;
+                dropSpeed = initial_drop_speed;
                 onDrop = false;
             }
             if(dying) {
-                dropSpeed = 20f;
+                dropSpeed = arriving_speed;
                 transform.Rotate(Vector3.forward * Time.deltaTime * dying_rotation_speed * dying_rotation_direction);
             }
             if(transform.position.y <= Y_LIMIT) {

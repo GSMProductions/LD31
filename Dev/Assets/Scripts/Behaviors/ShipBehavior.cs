@@ -110,6 +110,8 @@ public class ShipBehavior : MonoBehaviour {
             newRoom.transform.position = newPosition;
             ship[x,2] =  newRoom.GetComponent<RoomBehavior>();
             ship[x,2].GiveDropTarget(roomUnitySize*2);
+            ship[x,2].arriving = true;
+            ship[x,2].dropSpeed = 20f;
         }
     }
 

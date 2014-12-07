@@ -11,10 +11,13 @@ public class TitleScreenBehaviour : MonoBehaviour {
     private float direction = 1.0f;
 
     private KeyboardManager system;
+    private MouseManager system_mouse;
 	// Use this for initialization
 	void Start () {
 	   system = GameObject.Find("System").GetComponent<KeyboardManager>();
+       system_mouse = GameObject.Find("System").GetComponent<MouseManager>();
        system.enabled = false;
+       system_mouse.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -41,6 +44,7 @@ public class TitleScreenBehaviour : MonoBehaviour {
         direction = 1f;
         sliding = true;
         system.enabled = true;
+        system_mouse.enabled = true;
     }
 
     public void SlideDown() {
@@ -55,5 +59,6 @@ public class TitleScreenBehaviour : MonoBehaviour {
         sliding = true;
         transform.position = new Vector3(transform.position.x, initial_y, transform.position.z);
         system.enabled = false;
+        system_mouse.enabled = false;
     }
 }

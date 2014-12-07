@@ -11,9 +11,11 @@ public class CharacterBehavior : MonoBehaviour {
 
     public float moveTolerance = 0.1f;
 
+    private Animator animator;
+
     // Use this for initialization
-    void Start () {
-    
+    void Awake () {
+        animator = GetComponent<Animator>();
     }
     
     // Update is called once per frame
@@ -63,6 +65,8 @@ public class CharacterBehavior : MonoBehaviour {
         }
 
         Vector3 newPosition = new Vector3(transform.position.x + dx * Time.deltaTime * speed, transform.position.y + dy * Time.deltaTime * speed, 0f);
+        animator.SetFloat("dx", dx);
+        animator.SetFloat("dy", dy);
         PositionOnRoom(newPosition);
     }
 

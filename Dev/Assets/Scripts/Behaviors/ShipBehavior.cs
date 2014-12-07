@@ -245,6 +245,42 @@ public class ShipBehavior : MonoBehaviour {
             }
         }
 
+        if(found) {
+            Debug.Log("FOUND!");
+            int sx = x1;
+            int sy = y1;
+            bool ok = false;
+            while(sx != x2 || sy != y2) {
+                int val = 20;
+                int px = -1;
+                int py = -1;
+                for (int sens=0; sens < 4 && !ok; sens++) {
+                    int dx = 0 ,dy = 0;
+                    switch(sens) {
+                        case 0 : dx = 1; break;
+                        case 1 : dy = 1; break;
+                        case 2 : dx = -1; break;
+                        case 3 : dy = -1; break;
+                    }
+                    int nx = sx + dx;
+                    int ny = sy + dy;
+                    if(nx >= 0 && ny >= 0 && nx <= 2 && ny <= 2) {
+                        if (map[nx,ny] < val) {
+                            val = map[nx,ny];
+                            px = nx;
+                            py = ny;
+                        }
+                    }
+                }
+                Debug.Log(px + " " + py + " --> " + val);
+                sx = px;
+                sy = py;
+                path.Add(ship[px,py]);
+            }
+        }
+        else {
+            return null;
+        }
         return path;
     }
 }

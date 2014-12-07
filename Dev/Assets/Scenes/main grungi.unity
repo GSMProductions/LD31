@@ -504,7 +504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1162111132
 Transform:
   m_ObjectHideFlags: 0
@@ -631,11 +631,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3deffd0d4323d7438d4b76e6f185c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 80
+  rotationSpeed: 360
   onRotation: 0
   targetRotation: 0
   rotationSens: 1
   rotationTolerance: 2
+  rotation_sinus_amplitude: 1
+  hero: {fileID: 0}
 --- !u!1 &1683727248
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class ShipBehavior : MonoBehaviour {
     public float targetRotation;
     public float rotationSens = 1.0f;
     public float rotationTolerance = 2f;
+    public float rotation_sinus_amplitude = 1f;
 
     public RoomBehavior[,] ship = new RoomBehavior[3,3];
 
@@ -29,6 +30,7 @@ public class ShipBehavior : MonoBehaviour {
     }
 
     private void Rotate() {
+        float rotation_speed_amplitude;
         if (onRotation && !OnDropping()) {
             if (transform.rotation.eulerAngles.z < targetRotation + rotationTolerance && transform.rotation.eulerAngles.z > targetRotation - rotationTolerance) {
                 transform.eulerAngles = new Vector3(0f, 0f, targetRotation);
@@ -48,8 +50,8 @@ public class ShipBehavior : MonoBehaviour {
                 Drop();
             }
             else {
-
-                transform.Rotate(Vector3.forward * Time.deltaTime * rotationSpeed * rotationSens);
+                rotation_speed_amplitude = Mathf.Max(0.1f,Mathf.Sin(Mathf.PI / 180f * rotation_sinus_amplitude *Mathf.Abs(targetRotation-transform.rotation.eulerAngles.z)));
+                transform.Rotate(Vector3.forward * Time.deltaTime * rotationSpeed * rotationSens * rotation_speed_amplitude);
             }
         }
     }
@@ -110,7 +112,13 @@ public class ShipBehavior : MonoBehaviour {
 
             float roomUnitySize = (float)SystemManager.ROOM_PIXEL_SIZE/(float)SystemManager.PIXEL_PER_UNIT;
 
+            ship[x,0].dying = true;
+            ship[x,0].dying_rotation_direction = Random.Range(-1, 2);
+            while(ship[x,0].dying_rotation_direction == 0f) {
+                ship[x,0].dying_rotation_direction = Random.Range(-1, 2);
+            }
             ship[x,0].GiveDropTarget(roomUnitySize*2);
+
             ship[x,0] = ship [x,1];
             ship[x,0].GiveDropTarget(roomUnitySize);
             
@@ -126,6 +134,8 @@ public class ShipBehavior : MonoBehaviour {
             newRoom.transform.position = newPosition;
             ship[x,2] =  newRoom.GetComponent<RoomBehavior>();
             ship[x,2].GiveDropTarget(roomUnitySize*2);
+            ship[x,2].arriving = true;
+            ship[x,2].dropSpeed = 20f;
         }
     }
 

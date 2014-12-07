@@ -22,7 +22,7 @@ public class ShipBehavior : MonoBehaviour {
     }
 
     private void Rotate() {
-        if (onRotation) {
+        if (onRotation && !OnDropping()) {
             if (transform.rotation.eulerAngles.z < targetRotation + rotationTolerance && transform.rotation.eulerAngles.z > targetRotation - rotationTolerance) {
                 transform.eulerAngles = new Vector3(0f, 0f, targetRotation);
                 onRotation = false;
@@ -81,31 +81,46 @@ public class ShipBehavior : MonoBehaviour {
     }
 
     public void Drop() {
-        int x = Random.Range(0,3);
-        float roomUnitySize = (float)SystemManager.ROOM_PIXEL_SIZE/(float)SystemManager.PIXEL_PER_UNIT;
+        if (!OnDropping()){
 
-        ship[x,0].GiveDropTarget(roomUnitySize*2);
-        
-        ship[x,0] = ship [x,1];
-        ship[x,0].GiveDropTarget(roomUnitySize);
-        
-        Vector3 newPosition = ship[x,2].transform.position;
+            int x = Random.Range(0,3);
+            float roomUnitySize = (float)SystemManager.ROOM_PIXEL_SIZE/(float)SystemManager.PIXEL_PER_UNIT;
 
-        ship[x,1] = ship [x,2];
-        ship[x,1].GiveDropTarget(roomUnitySize);
+            ship[x,0].GiveDropTarget(roomUnitySize*2);
+            
+            ship[x,0] = ship [x,1];
+            ship[x,0].GiveDropTarget(roomUnitySize);
+            
+            Vector3 newPosition = ship[x,2].transform.position;
 
-        GameObject newRoom = GenerateRoom();
-        newRoom.transform.parent = transform;
+            ship[x,1] = ship [x,2];
+            ship[x,1].GiveDropTarget(roomUnitySize);
 
-        newPosition.y += roomUnitySize*2;
-        newRoom.transform.position = newPosition;
-        ship[x,2] =  newRoom.GetComponent<RoomBehavior>();
-        ship[x,2].GiveDropTarget(roomUnitySize*2);
+            GameObject newRoom = GenerateRoom();
+            newRoom.transform.parent = transform;
 
+            newPosition.y += roomUnitySize*2;
+            newRoom.transform.position = newPosition;
+            ship[x,2] =  newRoom.GetComponent<RoomBehavior>();
+            ship[x,2].GiveDropTarget(roomUnitySize*2);
+        }
     }
 
     public static GameObject GenerateRoom() {
         string name = "room4";
         return Instantiate(Resources.Load(name, typeof(GameObject))) as GameObject;
     }
+
+    public bool OnDropping()
+        {
+            bool onDrop = false;
+            for (int x = 0; x < 3 ; x++) {
+                for (int y = 0; y < 3 ; y++) {
+                    if (ship[x,y].onDrop) {
+                        onDrop = true;
+                    }
+                }
+            }
+            return onDrop;
+        }
 }

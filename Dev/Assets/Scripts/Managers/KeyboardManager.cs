@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class KeyboardManager : MonoBehaviour {
@@ -17,9 +17,11 @@ public class KeyboardManager : MonoBehaviour {
     
     // Update is called once per frame
     void Update () {
-    if(Input.GetKeyDown(KeyCode.RightArrow))
-        shipBehavior.GiveRotation(RIGHTANGLE);
-    else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        shipBehavior.GiveRotation(LEFTANGLE);
+    if (!shipBehavior.OnDropping()) {
+        if(Input.GetKeyDown(KeyCode.RightArrow))
+            shipBehavior.GiveRotation(RIGHTANGLE);
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            shipBehavior.GiveRotation(LEFTANGLE);
+        }
     }
 }

@@ -147,17 +147,95 @@ public class ShipBehavior : MonoBehaviour {
             return onDrop;
         }
 
-    public void FindPath(int x1, int y1, int x2, int y2) {
-        RoomBehavior [,] map = new RoomBehavior[3,3];
-        for (int x = 0; x < 3 ; x++) {
-            for (int y = 0; y < 3 ; y++) {
-                int val = System.Math.Abs(x-x1) + System.Math.Abs(y-y1);
-                if (ship[x,y].monsterIsHere) {
-                    val += 10;
-                }
-                map = val;
+    public List<Vector2> FindPath(int x1, int y1, int x2, int y2) {
+        int [,] map = new int[3,3];
+        for (int mx = 0; mx < 3 ; mx++) {
+            for (int my = 0; my < 3 ; my++) {
+                map [mx,my] = -1;
             }
-         }
-    }
+        }
 
+        List<Vector2> roomList = new List<Vector2>();
+        List<Vector2> roomStore = new List<Vector2>();
+
+        roomList.Add(new Vector2(x1,y1));
+        bool found = false;
+        while(!found && roomList.Count > 0){
+            foreach(Vector2 room in roomList) {
+                for (int sens = 0; sens < 4 && !found; sens++) {
+                    if (ship[(int)room.x,(int)room.y].opening[sens] && map[(int)room.x,(int)room.y] == -1) {
+                        int dx = 0;
+                        int dy = 0;
+                        switch(sens) {
+                            case 0 :
+                                dy = 1;
+                                break;
+                            case 1 :
+                                dx = 1;
+                                break;
+                            case 2 :
+                                dy = -1;
+                                break;
+                            case 3 :
+                                dx = -1;
+                                break;
+                        }
+                        int dMan = System.Math.Abs(((int)room.x + dx) - x2) + System.Math.Abs(((int)room.y + dy) - y2);
+                        if(ship[(int)room.x,(int)room.y].monsterIsHere) {
+                            dMan += 10;
+                        }
+                        roomStore.Add(new Vector2(room.x + dx , room.y + dy));
+                        if((int)room.x + dx == x2 && (int)room.y + dy == y2) {
+                            found = true;
+                        }
+                    }
+                }
+                roomList = roomStore;
+                roomStore =  new List<Vector2>();
+            }
+        }
+
+        List<Vector2> path = new List<Vector2>();
+
+        if (!found) {
+            return null;
+        }
+
+        int x = x1;
+        int y = y1;
+
+        while(x != x2 || y != y2) {
+            int px = -1, py = -1, val = 10;
+            for (int sens = 0; sens < 4 && !found; sens++) {
+                int dx = 0;
+                int dy = 0;
+                switch(sens) {
+                    case 0 :
+                        dy = 1;
+                        break;
+                    case 1 :
+                        dx = 1;
+                        break;
+                    case 2 :
+                        dy = -1;
+                        break;
+                    case 3 :
+                        dx = -1;
+                        break;
+                }
+                if(map [x+dx, y+dy] != -1) {
+                    if (val > map[x+dx, y+dy]) {
+                        val = map[x+dx, y+dy];
+                        px = x+dx;
+                        py = y+dy;
+                    }
+                }
+            }
+            path.Add(new Vector2((int)px,(int)py));
+            x = px;
+            y = py;
+        }
+
+    return path;
+    }
 }

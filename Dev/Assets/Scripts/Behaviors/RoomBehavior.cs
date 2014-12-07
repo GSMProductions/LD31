@@ -19,6 +19,8 @@ public class RoomBehavior : MonoBehaviour {
     public float yTarget;
     public float dropTolerance = 0.2f;
 
+    public bool heroIsHere = false;
+
     // Use this for initialization
     public void Start () {
         

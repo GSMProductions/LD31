@@ -70,6 +70,9 @@ public class RoomBehavior : MonoBehaviour {
 
     }
 
+    public void AddHeroOnRoom() {
+        }
+
     // Update is called once per frame
     public void Update () {
         Dropping();

@@ -12,6 +12,13 @@ public class ShipBehavior : MonoBehaviour {
 
     public RoomBehavior[,] ship = new RoomBehavior[3,3];
 
+    public HeroBehavior hero;
+
+    public enum Sens {
+        clockwise,
+        antiClockwise
+    }
+
     // Use this for initialization
     void Start () {
     }
@@ -26,6 +33,17 @@ public class ShipBehavior : MonoBehaviour {
             if (transform.rotation.eulerAngles.z < targetRotation + rotationTolerance && transform.rotation.eulerAngles.z > targetRotation - rotationTolerance) {
                 transform.eulerAngles = new Vector3(0f, 0f, targetRotation);
                 onRotation = false;
+
+                Sens sens = Sens.clockwise;
+                if (rotationSens < 0) {
+                    sens =  Sens.antiClockwise;
+                }
+                for(int x = 0; x < 3; x++) {
+                    for(int y = 0; y < 3; y++) {
+                        ship[x,y].RotationEffect(sens);
+                    }
+                }
+                hero.RotationDesactivate();
                 UpdateShip();
                 Drop();
             }
@@ -65,6 +83,7 @@ public class ShipBehavior : MonoBehaviour {
         if(onRotation) {
             return;
         }
+        hero.RotationActivate();
         targetRotation = transform.rotation.eulerAngles.z + rotation;
         onRotation =  true;
         if (rotation < 0f) {
@@ -84,10 +103,14 @@ public class ShipBehavior : MonoBehaviour {
         if (!OnDropping()){
 
             int x = Random.Range(0,3);
+
+            while(ship[x,0].heroIsHere) {
+                x = Random.Range(0,3);
+            }
+
             float roomUnitySize = (float)SystemManager.ROOM_PIXEL_SIZE/(float)SystemManager.PIXEL_PER_UNIT;
 
             ship[x,0].GiveDropTarget(roomUnitySize*2);
-            
             ship[x,0] = ship [x,1];
             ship[x,0].GiveDropTarget(roomUnitySize);
             
@@ -123,4 +146,18 @@ public class ShipBehavior : MonoBehaviour {
             }
             return onDrop;
         }
+
+    public void FindPath(int x1, int y1, int x2, int y2) {
+        RoomBehavior [,] map = new RoomBehavior[3,3];
+        for (int x = 0; x < 3 ; x++) {
+            for (int y = 0; y < 3 ; y++) {
+                int val = System.Math.Abs(x-x1) + System.Math.Abs(y-y1);
+                if (ship[x,y].monsterIsHere) {
+                    val += 10;
+                }
+                map = val;
+            }
+         }
+    }
+
 }

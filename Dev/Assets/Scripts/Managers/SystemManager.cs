@@ -30,6 +30,11 @@ public class SystemManager : MonoBehaviour {
                 go_rooms.GetComponent<ShipBehavior>().ship[(int)index_x,(int)index_y] = newRoom.GetComponent<RoomBehavior>();
             }
         }
+        GameObject hero = HeroBehavior.GiveHero();
+        go_rooms.GetComponent<ShipBehavior>().ship[0,0].AddHeroOnRoom(hero.GetComponent<HeroBehavior>());
+        go_rooms.GetComponent<ShipBehavior>().hero = hero.GetComponent<HeroBehavior>();
+
+        hero.GetComponent<HeroBehavior>().PositionOnRoom(go_rooms.GetComponent<ShipBehavior>().ship[0,0].transform.position);
     }
 
     

@@ -20,6 +20,11 @@ public class RoomBehavior : MonoBehaviour {
     public float dropTolerance = 0.2f;
 
     public bool heroIsHere = false;
+    public bool monsterIsHere = false;
+
+    public HeroBehavior hero = null;
+
+    public bool [] opening = new bool[4];
 
     // Use this for initialization
     public void Start () {
@@ -41,6 +46,30 @@ public class RoomBehavior : MonoBehaviour {
         go_sprite.GetComponent<SpriteRenderer>().sprite = newSprite;
     }
 
+
+    public void RotationEffect(ShipBehavior.Sens sens) {
+        bool [] saveOpening = new bool[4];
+        saveOpening[0] = opening[0];
+        saveOpening[1] = opening[1];
+        saveOpening[2] = opening[2];
+        saveOpening[3] = opening[3];
+
+        switch(sens) {
+            case ShipBehavior.Sens.antiClockwise :
+                opening[0] = saveOpening[3];
+                opening[1] = saveOpening[0];
+                opening[2] = saveOpening[1];
+                opening[3] = saveOpening[2];
+                break;
+            case ShipBehavior.Sens.clockwise :
+                opening[0] = saveOpening[1];
+                opening[1] = saveOpening[2];
+                opening[2] = saveOpening[3];
+                opening[3] = saveOpening[0];
+                break;
+        }
+
+    }
     public void Dropping() {
         if (onDrop) {
             float x = transform.position.x;
@@ -70,8 +99,17 @@ public class RoomBehavior : MonoBehaviour {
 
     }
 
-    public void AddHeroOnRoom() {
-        }
+    public void AddHeroOnRoom(HeroBehavior hero) {
+        this.hero = hero;
+        this.heroIsHere = true;
+        this.hero.transform.parent = transform;
+        this.hero.room = this;
+    }
+
+    public void HeroLeaveRoom() {
+        this.hero = null;
+        this.heroIsHere = false;
+    }
 
     // Update is called once per frame
     public void Update () {

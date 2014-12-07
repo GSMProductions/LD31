@@ -88,8 +88,13 @@ public class ShipBehavior : MonoBehaviour {
             int x = Random.Range(0,3);
             float roomUnitySize = (float)SystemManager.ROOM_PIXEL_SIZE/(float)SystemManager.PIXEL_PER_UNIT;
 
+            ship[x,0].dying = true;
+            ship[x,0].dying_rotation_direction = Random.Range(-1, 2);
+            while(ship[x,0].dying_rotation_direction == 0f) {
+                ship[x,0].dying_rotation_direction = Random.Range(-1, 2);
+            }
             ship[x,0].GiveDropTarget(roomUnitySize*2);
-            
+
             ship[x,0] = ship [x,1];
             ship[x,0].GiveDropTarget(roomUnitySize);
             

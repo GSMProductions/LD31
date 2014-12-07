@@ -21,6 +21,10 @@ public class RoomBehavior : MonoBehaviour {
 
     public bool heroIsHere = false;
 
+    public bool dying = false;
+    public float dying_rotation_speed = 25f;
+    public float dying_rotation_direction = 1.0f;
+
     // Use this for initialization
     public void Start () {
         
@@ -54,6 +58,10 @@ public class RoomBehavior : MonoBehaviour {
                 newPosition.y = yTarget;
                 transform.position =  newPosition;
                 onDrop = false;
+            }
+            if(dying) {
+                dropSpeed = 20f;
+                transform.Rotate(Vector3.forward * Time.deltaTime * dying_rotation_speed * dying_rotation_direction);
             }
             if(transform.position.y <= Y_LIMIT) {
                 Destroy(gameObject);

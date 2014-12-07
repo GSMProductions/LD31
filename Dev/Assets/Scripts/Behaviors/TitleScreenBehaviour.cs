@@ -7,7 +7,6 @@ public class TitleScreenBehaviour : MonoBehaviour {
 
     private float target_y = 0f;
     private float initial_y = 0f;
-    private float animation_speed = 2f;
     private float animation_timer = 0f;
     private float direction = 1.0f;
 

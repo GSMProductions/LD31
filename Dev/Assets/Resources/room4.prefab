@@ -162,6 +162,15 @@ MonoBehaviour:
   yTarget: 0
   dropTolerance: .400000006
   heroIsHere: 0
+  monsterIsHere: 0
+  hero: {fileID: 0}
+  opening: 00000000
+  dying: 0
+  dying_rotation_speed: 25
+  dying_rotation_direction: 1
+  arriving: 0
+  arriving_speed: 20
+  initial_drop_speed: 10
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

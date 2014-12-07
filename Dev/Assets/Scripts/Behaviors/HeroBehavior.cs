@@ -15,8 +15,15 @@ public class HeroBehavior : CharacterBehavior {
     public override void Update () {
         base.Update();
         if(roomClicked != null) {
-            List<RoomBehavior> path = new List<RoomBehavior>();
-            if (path.Count > 0 ) {
+            int x1 = room.x;
+            int y1 = room.y;
+            int x2 = roomClicked.x;
+            int y2 = roomClicked.y;
+
+            List<RoomBehavior> path = ship.FindPath(x1, y1, x2, y2);
+
+            // Debug.Log(path);
+            if (path != null && path.Count > 0) {
                 targetRoom = path[0];
             }
             else {

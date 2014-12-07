@@ -160,6 +160,9 @@ public class ShipBehavior : MonoBehaviour {
         }
 
     public List<RoomBehavior> FindPath(int x1, int y1, int x2, int y2) {
+        
+        List<RoomBehavior> path =  new List<RoomBehavior>();
+
         int [,] map = new int[3,3];
         for (int mx = 0; mx < 3 ; mx++) {
             for (int my = 0; my < 3 ; my++) {
@@ -167,87 +170,62 @@ public class ShipBehavior : MonoBehaviour {
             }
         }
 
-        List<Vector2> roomList = new List<Vector2>();
-        List<Vector2> roomStore = new List<Vector2>();
-
-        roomList.Add(new Vector2(x1,y1));
+        List<int[]> roomList = new List<int []>();
+        List<int[]> roomStore = new List<int []>();
         bool found = false;
-        while(!found && roomList.Count > 0){
-            foreach(Vector2 room in roomList) {
-                for (int sens = 0; sens < 4 && !found; sens++) {
-                    if (ship[(int)room.x,(int)room.y].opening[sens] && map[(int)room.x,(int)room.y] == -1) {
-                        int dx = 0;
-                        int dy = 0;
+        int [] first = new int[2];
+
+        first[0] = x1;
+        first[1] = y1; 
+
+        roomStore.Add(first);
+            int cpt = 0;
+        while(!found && roomStore.Count > 0) {
+            roomList = roomStore;
+            roomStore = new List<int []>();
+            cpt++;
+
+            foreach(int [] current in roomList) {
+                int cx = current[0];
+                int cy = current[1];
+                for(int sens=0; sens < 4 && !found; sens++) {
+                    if(ship[cx,cy].opening[sens]) {
+                        int opposite = (sens + 2) % 4;
+                        int dx = 0 ,dy = 0;
                         switch(sens) {
-                            case 0 :
-                                dy = 1;
-                                break;
-                            case 1 :
-                                dx = 1;
-                                break;
-                            case 2 :
-                                dy = -1;
-                                break;
-                            case 3 :
-                                dx = -1;
-                                break;
+                            case 0 : dx = 1; break;
+                            case 1 : dy = 1; break;
+                            case 2 : dx = -1; break;
+                            case 3 : dy = -1; break;
                         }
-                        int dMan = System.Math.Abs(((int)room.x + dx) - x2) + System.Math.Abs(((int)room.y + dy) - y2);
-                        if(ship[(int)room.x,(int)room.y].monsterIsHere) {
-                            dMan += 10;
-                        }
-                        roomStore.Add(new Vector2(room.x + dx , room.y + dy));
-                        if((int)room.x + dx == x2 && (int)room.y + dy == y2) {
-                            found = true;
+                        int [] other = new int[2];
+                        int ox = cx + dx;
+                        int oy = cy + dy;
+                        other[0] = ox;
+                        other[1] = oy;
+                        if(ox >= 0 && oy >= 0 && ox <= 2 && oy <= 2) {
+                            if(map[ox,oy] == -1) {
+                                if(ship[ox,oy].opening[opposite]) {
+                                    int dMan;
+                                    if(ship[ox,oy].monsterIsHere) {
+                                        dMan = 10;
+                                    }
+                                    else {
+                                        dMan = System.Math.Abs(ox-x2) + System.Math.Abs(oy-y2);
+                                    }
+                                    map[ox,oy] = dMan;
+                                    if(ox == x2 && oy == y2) {
+                                        found =  true;
+                                    }
+                                    roomStore.Add(other);
+                                }
+                            }
                         }
                     }
                 }
-                roomList = roomStore;
-                roomStore =  new List<Vector2>();
             }
         }
 
-        List<RoomBehavior> path = new List<RoomBehavior>();
-
-        if (!found) {
-            return null;
-        }
-
-        int x = x1;
-        int y = y1;
-
-        while(x != x2 || y != y2) {
-            int px = -1, py = -1, val = 10;
-            for (int sens = 0; sens < 4 && !found; sens++) {
-                int dx = 0;
-                int dy = 0;
-                switch(sens) {
-                    case 0 :
-                        dy = 1;
-                        break;
-                    case 1 :
-                        dx = 1;
-                        break;
-                    case 2 :
-                        dy = -1;
-                        break;
-                    case 3 :
-                        dx = -1;
-                        break;
-                }
-                if(map [x+dx, y+dy] != -1) {
-                    if (val > map[x+dx, y+dy]) {
-                        val = map[x+dx, y+dy];
-                        px = x+dx;
-                        py = y+dy;
-                    }
-                }
-            }
-            path.Add(ship[(int)px,(int)py]);
-            x = px;
-            y = py;
-        }
-
-    return path;
+        return path;
     }
 }

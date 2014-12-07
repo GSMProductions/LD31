@@ -7,7 +7,7 @@ public class RoomBehavior : MonoBehaviour {
     const string PICTURE_PREFIX = "dsg_";
     const string GAMEOBJECT_SPRITE = "dsg_room";
     const string NAME_PREFIX = "room";
-    const int NUMBER_OF_TYPE = 2;
+    const int NUMBER_OF_TYPE = 3;
 
     const float Y_LIMIT = -35.00f;
 

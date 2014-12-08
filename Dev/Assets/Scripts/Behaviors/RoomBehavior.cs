@@ -100,11 +100,15 @@ public class RoomBehavior : MonoBehaviour {
                 newPosition = transform.position;
                 newPosition.y = yTarget;
                 transform.position =  newPosition;
+                if (dropSpeed != initial_drop_speed)
+                    GameObject.Find("Sound System").GetComponent<MusicManager>().PlaySound(6);
                 dropSpeed = initial_drop_speed;
                 onDrop = false;
             }
             if(dying) {
                 dropSpeed = arriving_speed;
+                if (!GameObject.Find("Sound System").GetComponent<MusicManager>().sfx[5].isPlaying )
+                    GameObject.Find("Sound System").GetComponent<MusicManager>().PlaySound(5);
                 transform.Rotate(Vector3.forward * Time.deltaTime * dying_rotation_speed * dying_rotation_direction);
             }
             if(transform.position.y <= Y_LIMIT) {
@@ -169,6 +173,7 @@ public class RoomBehavior : MonoBehaviour {
         if( pickup != null) {
 
             Destroy(pickup.gameObject);
+            GameObject.Find("Sound System").GetComponent<MusicManager>().PlaySound(3);
             pickup = null;
             hero.counter++;
         }

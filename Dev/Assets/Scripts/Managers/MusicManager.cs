@@ -6,6 +6,8 @@ public class MusicManager : MonoBehaviour {
     public AudioSource[] bgm_tracks;
     private int currentMusic = 0;
 
+    public AudioSource[] sfx;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -20,5 +22,13 @@ public class MusicManager : MonoBehaviour {
         bgm_tracks[currentMusic].Stop();
         bgm_tracks[index].Play();
         currentMusic = index;
+    }
+
+    public void PlaySound(int index) {
+        sfx[index].Play();
+    }
+
+    public void StopSound(int index) {
+        sfx[index].Stop();
     }
 }

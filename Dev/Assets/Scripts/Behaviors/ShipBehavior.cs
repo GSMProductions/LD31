@@ -128,6 +128,7 @@ public class ShipBehavior : MonoBehaviour {
         }
         hero.RotationActivate();
         monster.RotationActivate();
+        GameObject.Find("Sound System").GetComponent<MusicManager>().PlaySound(4);
 
         for(int x = 0; x < 3; x++) {
             for(int y = 0; y < 3; y++) {
@@ -352,11 +353,20 @@ public class ShipBehavior : MonoBehaviour {
 
     public void CheckGameOver() {
         if (!gameover) {
+            if (hero.room == monster.room && !GameObject.Find("Sound System").GetComponent<MusicManager>().sfx[1].isPlaying ) {
+                GameObject.Find("Sound System").GetComponent<MusicManager>().PlaySound(1);
+            }
             if ( (hero.transform.position - monster.transform.position).magnitude < 1f) {
                 Instantiate (explosion, (hero.transform.position + monster.transform.position)/2f, monster.transform.rotation);
                 gameover = true;
                 hero.gameObject.SetActive(false);
                 monster.gameObject.SetActive(false);
+                if (GameObject.Find("Sound System").GetComponent<MusicManager>().sfx[1].isPlaying) {
+                    GameObject.Find("Sound System").GetComponent<MusicManager>().StopSound(1);
+                }
+                GameObject.Find("Sound System").GetComponent<MusicManager>().PlaySound(0);
+                GameObject.Find("Sound System").GetComponent<MusicManager>().StopSound(7);
+                GameObject.Find("Sound System").GetComponent<MusicManager>().StopSound(8);
                 gameover_screen.SlideIn();
             }
         }

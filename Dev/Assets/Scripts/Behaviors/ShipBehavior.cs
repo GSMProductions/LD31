@@ -29,6 +29,7 @@ public class ShipBehavior : MonoBehaviour {
     void Update () {
         if(!OnDropping()) {
             hero.DropDesactivate();
+            monster.DropDesactivate();
         }
         Rotate();
     }
@@ -50,6 +51,7 @@ public class ShipBehavior : MonoBehaviour {
                     }
                 }
                 hero.RotationDesactivate();
+                monster.RotationDesactivate();
                 UpdateShip();
                 Drop();
                 UpdateShip();
@@ -93,6 +95,8 @@ public class ShipBehavior : MonoBehaviour {
             return;
         }
         hero.RotationActivate();
+        monster.RotationActivate();
+
         targetRotation = transform.rotation.eulerAngles.z + rotation;
         onRotation =  true;
         if (rotation < 0f) {
@@ -111,6 +115,8 @@ public class ShipBehavior : MonoBehaviour {
     public void Drop() {
         if (!OnDropping()){
             hero.DropActivate();
+            monster.DropActivate();
+        
             int x = Random.Range(0,3);
 
             while(ship[x,0].heroIsHere) {

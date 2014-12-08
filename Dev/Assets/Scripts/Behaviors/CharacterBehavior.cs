@@ -10,6 +10,8 @@ public class CharacterBehavior : MonoBehaviour {
     public float speed = 10f;
     public ShipBehavior ship;
 
+    public Vector3 deltaRotation = Vector3.zero;
+
     public float moveTolerance = 0.1f;
 
     private Animator animator;
@@ -39,11 +41,14 @@ public class CharacterBehavior : MonoBehaviour {
     public void RotationActivate() {
         onRotation = true;
         transform.parent = null;
+        deltaRotation.x = transform.position.x - room.transform.position.x;
+        deltaRotation.y = transform.position.y - room.transform.position.y;
     }
 
     public void RotationDesactivate() {
         onRotation = false;
         transform.parent = room.transform;
+        deltaRotation = Vector3.zero;
     }
 
     public void DropActivate() {
@@ -59,6 +64,9 @@ public class CharacterBehavior : MonoBehaviour {
 
     public void PositionOnRoom(Vector3 newPosition) {
         newPosition.z =  transform.position.z;
+        newPosition.x += deltaRotation.x;
+        newPosition.y += deltaRotation.y;
+
         transform.position = newPosition;
     }
 

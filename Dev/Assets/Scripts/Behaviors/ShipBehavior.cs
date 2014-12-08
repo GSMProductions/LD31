@@ -205,11 +205,16 @@ public class ShipBehavior : MonoBehaviour {
         bool found = false;
         int [] first = new int[2];
 
-        first[0] = x1;
-        first[1] = y1; 
+        first[0] = x2;
+        first[1] = y2; 
+        if (ship[x2,y2].monsterIsHere) {
+            map[x2,y2] = 10;
+        } else {
+            map[x2,y2] = 1;
+        }
 
         roomStore.Add(first);
-            int cpt = 0;
+        int cpt = 0;
 
         while(!found && roomStore.Count > 0) {
             roomList = roomStore;
@@ -245,7 +250,7 @@ public class ShipBehavior : MonoBehaviour {
                                         dMan = System.Math.Abs(ox-x2) + System.Math.Abs(oy-y2);
                                     }
                                     map[ox,oy] = dMan;
-                                    if(ox == x2 && oy == y2) {
+                                    if(ox == x1 && oy == y1) {
                                         found =  true;
                                     }
                                     roomStore.Add(other);

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -159,7 +159,7 @@ public class ShipBehavior : MonoBehaviour {
         int rotations = Random.Range(0,4);
         GameObject room = Instantiate(Resources.Load(name[Random.Range(0,name.Length)], typeof(GameObject))) as GameObject;
         for (int r = 0; r < rotations; r++) {
-            room.GetComponent<RoomBehavior>().RotationEffect(Sens.clockwise);
+            room.GetComponent<RoomBehavior>().RotationEffect(Sens.antiClockwise);
         }
         room.transform.eulerAngles = new Vector3(0f, 0f, -90*rotations);
         return room;
@@ -199,6 +199,7 @@ public class ShipBehavior : MonoBehaviour {
 
         roomStore.Add(first);
             int cpt = 0;
+
         while(!found && roomStore.Count > 0) {
             roomList = roomStore;
             roomStore = new List<int []>();
@@ -212,10 +213,10 @@ public class ShipBehavior : MonoBehaviour {
                         int opposite = (sens + 2) % 4;
                         int dx = 0 ,dy = 0;
                         switch(sens) {
-                            case 0 : dx = 1; break;
-                            case 1 : dy = 1; break;
-                            case 2 : dx = -1; break;
-                            case 3 : dy = -1; break;
+                            case 0 : dy = 1; break;
+                            case 1 : dx = 1; break;
+                            case 2 : dy = -1; break;
+                            case 3 : dx = -1; break;
                         }
                         int [] other = new int[2];
                         int ox = cx + dx;
@@ -244,31 +245,40 @@ public class ShipBehavior : MonoBehaviour {
                 }
             }
         }
-
+        Debug.Log("Go to " + x2 + ", " + y2);
+        for (int y = 2 ; y >= 0; y-- ) Debug.Log(map[0,y] + " " + map[1,y] + " " + map[2,y]);
+        Debug.Log("found" + found);
+        //return path;
         if(found) {
-            Debug.Log("FOUND!");
+            //Debug.Log("FOUND!");
             int sx = x1;
             int sy = y1;
             bool ok = false;
-            while(sx != x2 || sy != y2) {
+
+            while((sx != x2 || sy != y2 )&& path.Count < 1) {
                 int val = 20;
                 int px = -1;
                 int py = -1;
                 for (int sens=0; sens < 4 && !ok; sens++) {
                     int dx = 0 ,dy = 0;
                     switch(sens) {
-                        case 0 : dx = 1; break;
-                        case 1 : dy = 1; break;
-                        case 2 : dx = -1; break;
-                        case 3 : dy = -1; break;
+                        case 0 : dy = 1; break;
+                        case 1 : dx = 1; break;
+                        case 2 : dy = -1; break;
+                        case 3 : dx = -1; break;
                     }
                     int nx = sx + dx;
                     int ny = sy + dy;
                     if(nx >= 0 && ny >= 0 && nx <= 2 && ny <= 2) {
-                        if (map[nx,ny] < val) {
-                            val = map[nx,ny];
-                            px = nx;
-                            py = ny;
+                        if(map[nx,ny] != -1) {
+                            int opposite = (sens + 2) % 4;
+                            if(ship[sx,sy].opening[sens]&&ship[nx,ny].opening[opposite]) {
+                                if (map[nx,ny] < val) {
+                                    val = map[nx,ny];
+                                    px = nx;
+                                    py = ny;
+                                }
+                            }
                         }
                     }
                 }

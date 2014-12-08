@@ -26,6 +26,12 @@ public class CharacterBehavior : MonoBehaviour {
         else if (targetRoom != null) {
             MoveToRoom();
         }
+
+        if(targetRoom != null) {
+            if(Vector3.Distance(transform.position, room.transform.position) > Vector3.Distance(transform.position, targetRoom.transform.position)) {
+                ChangeRoom();
+            }
+        }
     
     }
 
@@ -64,10 +70,19 @@ public class CharacterBehavior : MonoBehaviour {
             }
         }
 
-        Vector3 newPosition = new Vector3(transform.position.x + dx * Time.deltaTime * speed, transform.position.y + dy * Time.deltaTime * speed, 0f);
-        animator.SetFloat("dx", dx);
-        animator.SetFloat("dy", dy);
-        PositionOnRoom(newPosition);
+        if(dx == 0f && dy == 0f) {
+            targetRoom = null;
+        }
+        else {
+            Vector3 newPosition = new Vector3(transform.position.x + dx * Time.deltaTime * speed, transform.position.y + dy * Time.deltaTime * speed, 0f);
+            animator.SetFloat("dx", dx);
+            animator.SetFloat("dy", dy);
+            PositionOnRoom(newPosition);
+        }
+    }
+
+    public virtual void ChangeRoom() {
+        Debug.Log("Change Room!" + targetRoom.x +  " " + targetRoom.y);
     }
 
 }

@@ -45,7 +45,9 @@ public class HeroBehavior : CharacterBehavior {
         base.ChangeRoom();
         room.HeroLeaveRoom();
         targetRoom.AddHeroOnRoom(this);
-        counter ++;
     }
 
+    public override void InRoom() {
+        room.Pick();
+    }
 }

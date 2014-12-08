@@ -84,6 +84,7 @@ public class CharacterBehavior : MonoBehaviour {
 
         if(dx == 0f && dy == 0f) {
             targetRoom = null;
+            InRoom();
         }
         else {
             Vector3 newPosition = new Vector3(transform.position.x + dx * Time.deltaTime * speed, transform.position.y + dy * Time.deltaTime * speed, 0f);
@@ -97,4 +98,6 @@ public class CharacterBehavior : MonoBehaviour {
         //Debug.Log("Change Room!" + targetRoom.x +  " " + targetRoom.y);
     }
 
+    public virtual void InRoom() {
+    }
 }

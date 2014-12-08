@@ -53,6 +53,13 @@ public class ShipBehavior : MonoBehaviour {
                 }
                 hero.RotationDesactivate();
                 monster.RotationDesactivate();
+                for(int x = 0; x < 3; x++) {
+                    for(int y = 0; y < 3; y++) {
+                        if (ship[x,y].pickup != null) {
+                            ship[x,y].pickup.RotationDesactivate();
+                        }
+                    }
+                }
                 UpdateShip();
                 Drop();
                 UpdateShip();
@@ -97,6 +104,14 @@ public class ShipBehavior : MonoBehaviour {
         }
         hero.RotationActivate();
         monster.RotationActivate();
+
+        for(int x = 0; x < 3; x++) {
+            for(int y = 0; y < 3; y++) {
+                if (ship[x,y].pickup != null) {
+                    ship[x,y].pickup.RotationActivate();
+                }
+            }
+        }
 
         targetRotation = transform.rotation.eulerAngles.z + rotation;
         onRotation =  true;

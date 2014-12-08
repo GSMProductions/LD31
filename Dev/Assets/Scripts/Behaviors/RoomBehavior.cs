@@ -38,6 +38,7 @@ public class RoomBehavior : MonoBehaviour {
     public int y;
 
     public ShipBehavior ship;
+    public PickupBehavior pickup;
 
     // Use this for initialization
     public void Start () {
@@ -57,6 +58,8 @@ public class RoomBehavior : MonoBehaviour {
 
         Sprite newSprite = Sprite.Create(texture, rect, pivot,SystemManager.PIXEL_PER_UNIT);
         go_sprite.GetComponent<SpriteRenderer>().sprite = newSprite;
+
+        AddPickup();
     }
 
 
@@ -150,4 +153,22 @@ public class RoomBehavior : MonoBehaviour {
     public void OnMouseUp() {
         ship.hero.roomClicked = this;
     }
+
+    public void AddPickup() {
+        //add pickup
+        GameObject go_pickup =  PickupBehavior.GivePickup();
+        pickup = go_pickup.GetComponent<PickupBehavior>();
+        pickup.PositionOnRoom(transform.position);
+        pickup.room = this;
+        pickup.transform.parent = transform;
+    }
+
+    public void Pick() {
+        Debug.Log("In Room!!!");
+        if( pickup != null);
+            Destroy(pickup);
+            pickup = null;
+            hero.counter++;
+    }
+
 }

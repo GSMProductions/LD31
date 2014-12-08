@@ -47,6 +47,9 @@ public class SystemManager : MonoBehaviour {
         monster.GetComponent<MonsterBehavior>().ship = go_rooms.GetComponent<ShipBehavior>();
         monster.GetComponent<MonsterBehavior>().PositionOnRoom(go_rooms.GetComponent<ShipBehavior>().ship[2,2].transform.position);
 
+        //destroy fist pickup
+        //Destroy(go_rooms.GetComponent<ShipBehavior>().ship[0,0].pickup.gameObject);
+        //go_rooms.GetComponent<ShipBehavior>().ship[0,0].pickup = null;
     }
 
     public void Reset() {

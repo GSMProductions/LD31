@@ -59,7 +59,9 @@ public class RoomBehavior : MonoBehaviour {
         Sprite newSprite = Sprite.Create(texture, rect, pivot,SystemManager.PIXEL_PER_UNIT);
         go_sprite.GetComponent<SpriteRenderer>().sprite = newSprite;
 
-        AddPickup();
+        if(x!=0 || y!=0) {
+            AddPickup();
+        }
     }
 
 

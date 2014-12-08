@@ -687,7 +687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &895224195
 Transform:
   m_ObjectHideFlags: 0
@@ -1051,6 +1051,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: b9e746bbc6e711f4aa2c702c7a63623c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9e746bbc6e711f4aa2c702c7a63623c, type: 2}
   m_RootGameObject: {fileID: 895224194}
@@ -1071,7 +1075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1368092286
 Transform:
   m_ObjectHideFlags: 0
@@ -1341,6 +1345,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: e98a9d76848ce2045aeadfafe2c4a9ff, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e98a9d76848ce2045aeadfafe2c4a9ff, type: 2}
   m_RootGameObject: {fileID: 1368092285}
@@ -1395,6 +1403,7 @@ MonoBehaviour:
   monster: {fileID: 0}
   explosion: {fileID: 100000, guid: 968334fbde0c5fe499aeff2b5a6f97ff, type: 2}
   gameover_screen: {fileID: 895224196}
+  score: {fileID: 0}
 --- !u!1 &1923342106
 GameObject:
   m_ObjectHideFlags: 0

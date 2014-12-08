@@ -59,10 +59,12 @@ MonoBehaviour:
   room: {fileID: 0}
   targetRoom: {fileID: 0}
   onRotation: 0
+  onDrop: 0
   speed: 10
   ship: {fileID: 0}
   moveTolerance: .100000001
   roomClicked: {fileID: 0}
+  counter: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

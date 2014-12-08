@@ -358,3 +358,4 @@ MonoBehaviour:
   rotationTolerance: 2
   rotation_sinus_amplitude: 1
   hero: {fileID: 0}
+  monster: {fileID: 0}

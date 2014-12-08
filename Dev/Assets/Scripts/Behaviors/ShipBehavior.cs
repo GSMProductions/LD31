@@ -32,6 +32,7 @@ public class ShipBehavior : MonoBehaviour {
             monster.DropDesactivate();
         }
         Rotate();
+        CheckGameOver();
     }
 
     private void Rotate() {
@@ -119,7 +120,7 @@ public class ShipBehavior : MonoBehaviour {
         
             int x = Random.Range(0,3);
 
-            while(ship[x,0].heroIsHere) {
+            while(ship[x,0].heroIsHere || ship[x,0].monsterIsHere) {
                 x = Random.Range(0,3);
             }
 
@@ -308,5 +309,11 @@ public class ShipBehavior : MonoBehaviour {
             return null;
         }
         return path;
+    }
+
+    public void CheckGameOver() {
+        if (hero.room == monster.room) {
+            Debug.Log("GAME OVER!!!!");
+        }
     }
 }

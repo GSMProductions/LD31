@@ -8,7 +8,6 @@ public class HeroBehavior : CharacterBehavior {
     const string PREFAB_HERO_NAME = "hero";
 
     public RoomBehavior roomClicked = null;
-    private int justOne = 0;
 
     public int counter = 0;
 
@@ -28,7 +27,6 @@ public class HeroBehavior : CharacterBehavior {
                 // Debug.Log(path);
                 if (path != null && path.Count > 0) {
                     targetRoom = path[0];
-                    justOne ++;
                 }
                 else {
                     roomClicked = null;

@@ -16,6 +16,10 @@ public class ShipBehavior : MonoBehaviour {
     public HeroBehavior hero;
     public MonsterBehavior monster;
 
+    public GameObject explosion;
+    private bool gameover = false;
+    public TitleScreenBehaviour gameover_screen;
+
     public enum Sens {
         clockwise,
         antiClockwise
@@ -327,8 +331,14 @@ public class ShipBehavior : MonoBehaviour {
     }
 
     public void CheckGameOver() {
-        if (hero.room == monster.room) {
-            Debug.Log("GAME OVER!!!!");
+        if (!gameover) {
+            if ( (hero.transform.position - monster.transform.position).magnitude < 1f) {
+                Instantiate (explosion, (hero.transform.position + monster.transform.position)/2f, monster.transform.rotation);
+                gameover = true;
+                hero.gameObject.SetActive(false);
+                monster.gameObject.SetActive(false);
+                gameover_screen.SlideIn();
+            }
         }
     }
 }

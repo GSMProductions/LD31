@@ -10,6 +10,8 @@ public class HeroBehavior : CharacterBehavior {
     public RoomBehavior roomClicked = null;
     private int justOne = 0;
 
+    public int counter = 0;
+
     void Start () {
     }
 
@@ -45,6 +47,7 @@ public class HeroBehavior : CharacterBehavior {
         base.ChangeRoom();
         room.HeroLeaveRoom();
         targetRoom.AddHeroOnRoom(this);
+        counter ++;
     }
 
 }

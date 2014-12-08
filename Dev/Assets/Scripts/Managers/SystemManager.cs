@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SystemManager : MonoBehaviour {
@@ -36,9 +36,17 @@ public class SystemManager : MonoBehaviour {
         GameObject hero = HeroBehavior.GiveHero();
         go_rooms.GetComponent<ShipBehavior>().ship[0,0].AddHeroOnRoom(hero.GetComponent<HeroBehavior>());
         go_rooms.GetComponent<ShipBehavior>().hero = hero.GetComponent<HeroBehavior>();
+        
         hero.GetComponent<HeroBehavior>().ship = go_rooms.GetComponent<ShipBehavior>();
-
         hero.GetComponent<HeroBehavior>().PositionOnRoom(go_rooms.GetComponent<ShipBehavior>().ship[0,0].transform.position);
+
+        GameObject monster = MonsterBehavior.GiveMonster();
+        //go_rooms.GetComponent<ShipBehavior>().ship[0,0].AddHeroOnRoom(hero.GetComponent<HeroBehavior>());
+        go_rooms.GetComponent<ShipBehavior>().monster = hero.GetComponent<MonsterBehavior>();
+
+        monster.GetComponent<MonsterBehavior>().ship = go_rooms.GetComponent<ShipBehavior>();
+        monster.GetComponent<MonsterBehavior>().PositionOnRoom(go_rooms.GetComponent<ShipBehavior>().ship[0,0].transform.position);
+
     }
 
     

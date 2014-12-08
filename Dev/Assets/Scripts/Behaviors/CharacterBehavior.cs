@@ -94,7 +94,7 @@ public class CharacterBehavior : MonoBehaviour {
     }
 
     public virtual void ChangeRoom() {
-        Debug.Log("Change Room!" + targetRoom.x +  " " + targetRoom.y);
+        //Debug.Log("Change Room!" + targetRoom.x +  " " + targetRoom.y);
     }
 
 }

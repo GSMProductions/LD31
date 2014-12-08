@@ -23,6 +23,7 @@ public class RoomBehavior : MonoBehaviour {
     public bool monsterIsHere = false;
 
     public HeroBehavior hero = null;
+    public MonoBehaviour monster = null;
 
     public bool [] opening = new bool[4];
 
@@ -121,6 +122,13 @@ public class RoomBehavior : MonoBehaviour {
         this.heroIsHere = true;
         this.hero.transform.parent = transform;
         this.hero.room = this;
+    }
+
+    public void AddMonsterOnRoom(MonsterBehavior monster) {
+        this.monster = monster;
+        this.monsterIsHere = true;
+        this.monster.transform.parent = transform;
+        //this.monster.room = this;
     }
 
     public void HeroLeaveRoom() {

@@ -14,6 +14,7 @@ public class ShipBehavior : MonoBehaviour {
     public RoomBehavior[,] ship = new RoomBehavior[3,3];
 
     public HeroBehavior hero;
+    public MonsterBehavior monster;
 
     public enum Sens {
         clockwise,
@@ -249,9 +250,9 @@ public class ShipBehavior : MonoBehaviour {
                 }
             }
         }
-        Debug.Log("Go to " + x2 + ", " + y2);
-        for (int y = 2 ; y >= 0; y-- ) Debug.Log(map[0,y] + " " + map[1,y] + " " + map[2,y]);
-        Debug.Log("found" + found);
+       //Debug.Log("Go to " + x2 + ", " + y2);
+        //for (int y = 2 ; y >= 0; y-- ) Debug.Log(map[0,y] + " " + map[1,y] + " " + map[2,y]);
+        //Debug.Log("found" + found);
         //return path;
         if(found) {
             //Debug.Log("FOUND!");
@@ -286,7 +287,7 @@ public class ShipBehavior : MonoBehaviour {
                         }
                     }
                 }
-                Debug.Log(px + " " + py + " --> " + val);
+                //Debug.Log(px + " " + py + " --> " + val);
                 sx = px;
                 sy = py;
                 path.Add(ship[px,py]);

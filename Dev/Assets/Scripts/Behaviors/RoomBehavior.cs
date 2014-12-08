@@ -164,11 +164,12 @@ public class RoomBehavior : MonoBehaviour {
     }
 
     public void Pick() {
-        Debug.Log("In Room!!!");
-        if( pickup != null);
-            Destroy(pickup);
+        if( pickup != null) {
+
+            Destroy(pickup.gameObject);
             pickup = null;
             hero.counter++;
+        }
     }
 
 }

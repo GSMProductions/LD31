@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ShipBehavior : MonoBehaviour {
 
+    const string SCORE = "SCORE : ";
+    const int DIGIT = 9;
     public float rotationSpeed = 5.0f;
     public bool onRotation = false;
     public float targetRotation;
@@ -15,6 +18,8 @@ public class ShipBehavior : MonoBehaviour {
 
     public HeroBehavior hero;
     public MonsterBehavior monster;
+
+    public Text score;
 
     public enum Sens {
         clockwise,
@@ -32,7 +37,23 @@ public class ShipBehavior : MonoBehaviour {
             monster.DropDesactivate();
         }
         Rotate();
+        UpdateScore();
         CheckGameOver();
+    }
+
+
+    public void UpdateScore() {
+        if(hero != null) {
+            int currentScore = hero.counter;
+            int digit = (int)currentScore/10;
+            string text = "";
+            for(int n = 0; n < DIGIT - digit; n++ ) {
+                text += "0";
+            }
+            text = SCORE + text + currentScore;
+            score.text = text;
+        }
+
     }
 
     private void Rotate() {

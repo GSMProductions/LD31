@@ -60,7 +60,7 @@ MonoBehaviour:
   targetRoom: {fileID: 0}
   onRotation: 0
   onDrop: 0
-  speed: 10
+  speed: 5
   ship: {fileID: 0}
   moveTolerance: .100000001
 --- !u!212 &21200000

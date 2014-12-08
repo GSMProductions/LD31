@@ -49,9 +49,18 @@ public class SystemManager : MonoBehaviour {
 
     }
 
-    
-    // Update is called once per frame
+    public void Reset() {
+        foreach(Transform child in go_rooms.transform) {
+            if(child.name !=  "grille-vaisseau" && child.name !=  "VAISSEAU_no_anim") {
+                Destroy(child.gameObject);
+            }
+        }
+        LoadRooms();
+        go_rooms.GetComponent<ShipBehavior>().gameover = false;
+    }
+
     void Update () {
+        //Update is called once per frame
     
     }
 }

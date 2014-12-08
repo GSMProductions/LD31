@@ -20,7 +20,7 @@ public class ShipBehavior : MonoBehaviour {
     public MonsterBehavior monster;
 
     public GameObject explosion;
-    private bool gameover = false;
+    public bool gameover = false;
     public TitleScreenBehaviour gameover_screen;
     public Text score;
 

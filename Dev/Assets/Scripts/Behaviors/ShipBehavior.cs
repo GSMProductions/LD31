@@ -26,6 +26,9 @@ public class ShipBehavior : MonoBehaviour {
     
     // Update is called once per frame
     void Update () {
+        if(!OnDropping()) {
+            hero.DropDesactivate();
+        }
         Rotate();
     }
 
@@ -48,6 +51,7 @@ public class ShipBehavior : MonoBehaviour {
                 hero.RotationDesactivate();
                 UpdateShip();
                 Drop();
+                UpdateShip();
             }
             else {
                 rotation_speed_amplitude = Mathf.Max(0.1f,Mathf.Sin(Mathf.PI / 180f * rotation_sinus_amplitude *Mathf.Abs(targetRotation-transform.rotation.eulerAngles.z)));
@@ -105,7 +109,7 @@ public class ShipBehavior : MonoBehaviour {
 
     public void Drop() {
         if (!OnDropping()){
-
+            hero.DropActivate();
             int x = Random.Range(0,3);
 
             while(ship[x,0].heroIsHere) {

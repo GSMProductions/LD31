@@ -6,6 +6,7 @@ public class CharacterBehavior : MonoBehaviour {
     public RoomBehavior room;
     public RoomBehavior targetRoom;
     public bool onRotation = false;
+    public bool onDrop = false;
     public float speed = 10f;
     public ShipBehavior ship;
 
@@ -23,7 +24,7 @@ public class CharacterBehavior : MonoBehaviour {
         if (onRotation) {
             PositionOnRoom(room.transform.position);
         }
-        else if (targetRoom != null) {
+        else if (targetRoom != null && !onDrop) {
             MoveToRoom();
         }
 
@@ -43,6 +44,17 @@ public class CharacterBehavior : MonoBehaviour {
     public void RotationDesactivate() {
         onRotation = false;
         transform.parent = room.transform;
+    }
+
+    public void DropActivate() {
+        onDrop = true;
+        if (room != targetRoom) {
+            targetRoom = null;
+        }
+    }
+
+    public void DropDesactivate() {
+        onDrop = false;
     }
 
     public void PositionOnRoom(Vector3 newPosition) {

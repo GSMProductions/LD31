@@ -52,6 +52,10 @@ public class SystemManager : MonoBehaviour {
         //go_rooms.GetComponent<ShipBehavior>().ship[0,0].pickup = null;
     }
 
+    public void MonsterOn() {
+        go_rooms.GetComponent<ShipBehavior>().monster.monsterOn = true;
+    }
+
     public void Reset() {
         foreach(Transform child in go_rooms.transform) {
             if(child.name !=  "grille-vaisseau" && child.name !=  "VAISSEAU_no_anim") {
@@ -60,6 +64,7 @@ public class SystemManager : MonoBehaviour {
         }
         LoadRooms();
         go_rooms.GetComponent<ShipBehavior>().gameover = false;
+        MonsterOn();
     }
 
     void Update () {

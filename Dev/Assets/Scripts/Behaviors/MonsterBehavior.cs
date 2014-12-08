@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class MonsterBehavior : CharacterBehavior {
     const string PREFAB_MONSTER_NAME = "monster";
 
+    public bool monsterOn = false;
+
     // Use this for initialization
     void Start () {
     
@@ -13,6 +15,9 @@ public class MonsterBehavior : CharacterBehavior {
     
     // Update is called once per frame
     public override void Update () {
+        if(!monsterOn) {
+            return;
+        }
         base.Update();
         if(!onRotation) {
             if(targetRoom ==  null) {

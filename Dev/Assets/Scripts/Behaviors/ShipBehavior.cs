@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ShipBehavior : MonoBehaviour {
 
-    const string SCORE = "SCORE : ";
-    const int DIGIT = 9;
+    const string SCORE = "SCORE:";
+    const int DIGIT = 6;
     public float rotationSpeed = 5.0f;
     public bool onRotation = false;
     public float targetRotation;

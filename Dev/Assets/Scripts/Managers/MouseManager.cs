@@ -24,6 +24,7 @@ public class MouseManager : MonoBehaviour {
             is_dragging = true;
             mousePosition_initial = Input.mousePosition;
         } else if (!Input.GetMouseButtonUp(0) && is_dragging) {
+            if (ship.OnDropping()) return;
             Vector3 mouse_movement = Input.mousePosition - mousePosition_initial;
             if (Mathf.Abs(mouse_movement.x) > Mathf.Abs(mouse_movement.y)) {
                 if (mouse_movement.x < -drag_length) {

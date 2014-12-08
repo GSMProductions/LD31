@@ -41,11 +41,11 @@ public class SystemManager : MonoBehaviour {
         hero.GetComponent<HeroBehavior>().PositionOnRoom(go_rooms.GetComponent<ShipBehavior>().ship[0,0].transform.position);
 
         GameObject monster = MonsterBehavior.GiveMonster();
-        //go_rooms.GetComponent<ShipBehavior>().ship[0,0].AddHeroOnRoom(hero.GetComponent<HeroBehavior>());
-        go_rooms.GetComponent<ShipBehavior>().monster = hero.GetComponent<MonsterBehavior>();
+        go_rooms.GetComponent<ShipBehavior>().ship[2,2].AddMonsterOnRoom(monster.GetComponent<MonsterBehavior>());
+        go_rooms.GetComponent<ShipBehavior>().monster = monster.GetComponent<MonsterBehavior>();
 
         monster.GetComponent<MonsterBehavior>().ship = go_rooms.GetComponent<ShipBehavior>();
-        monster.GetComponent<MonsterBehavior>().PositionOnRoom(go_rooms.GetComponent<ShipBehavior>().ship[0,0].transform.position);
+        monster.GetComponent<MonsterBehavior>().PositionOnRoom(go_rooms.GetComponent<ShipBehavior>().ship[2,2].transform.position);
 
     }
 

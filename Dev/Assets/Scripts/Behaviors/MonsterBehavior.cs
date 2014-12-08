@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class MonsterBehavior : CharacterBehavior {
     const string PREFAB_MONSTER_NAME = "monster";
@@ -11,6 +13,7 @@ public class MonsterBehavior : CharacterBehavior {
     
     // Update is called once per frame
     public override void Update () {
+        base.Update();
     
     }
 

@@ -17,6 +17,13 @@ public class HeroBehavior : CharacterBehavior {
     public override void Update () {
         base.Update();
         if(!onRotation) {
+
+            if (targetRoom != null && !onDrop && !GameObject.Find("Sound System").GetComponent<MusicManager>().sfx[7].isPlaying) {
+                GameObject.Find("Sound System").GetComponent<MusicManager>().PlaySound(7);
+            } else if (targetRoom == null || onDrop) {
+                GameObject.Find("Sound System").GetComponent<MusicManager>().StopSound(7);
+            }
+
             if(roomClicked != null && targetRoom ==  null) {
                 int x1 = room.x;
                 int y1 = room.y;

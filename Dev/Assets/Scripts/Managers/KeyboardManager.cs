@@ -22,8 +22,6 @@ public class KeyboardManager : MonoBehaviour {
             shipBehavior.GiveRotation(RIGHTANGLE);
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
             shipBehavior.GiveRotation(LEFTANGLE);
-        } else if (Input.GetKeyUp(KeyCode.Escape)) {
-            Application.LoadLevel (Application.loadedLevelName);
         }
     }
 

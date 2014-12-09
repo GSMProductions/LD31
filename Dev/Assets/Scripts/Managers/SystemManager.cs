@@ -77,6 +77,7 @@ public class SystemManager : MonoBehaviour {
 
     void Update () {
         //Update is called once per frame
-    
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
 }

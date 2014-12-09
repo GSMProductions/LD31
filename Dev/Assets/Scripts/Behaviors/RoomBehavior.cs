@@ -157,7 +157,8 @@ public class RoomBehavior : MonoBehaviour {
     }
 
     public void OnMouseUp() {
-        ship.hero.roomClicked = this;
+        //ship.hero.roomClicked = this;
+        GameObject.Find("System").GetComponent<MouseManager>().RoomClicked(this);
     }
 
     public void AddPickup() {

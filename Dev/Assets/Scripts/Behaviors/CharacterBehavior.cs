@@ -62,6 +62,7 @@ public class CharacterBehavior : MonoBehaviour {
         transform.parent = room.transform;
         deltaRotation = Vector3.zero;
         angleInitial = 0f;
+        transform.position = newPosition;
     }
 
     public void DropActivate() {

@@ -12,6 +12,8 @@ public class SystemManager : MonoBehaviour {
     public GameObject go_rooms;
     public const int NumberOfRoomsBySide = 3;
 
+    public GameObject score;
+
     void Start () {
     
         go_rooms = GameObject.Find(GAMEOBJECT_ROOMS);
@@ -54,7 +56,13 @@ public class SystemManager : MonoBehaviour {
 
     public void MonsterOn() {
         go_rooms.GetComponent<ShipBehavior>().monster.monsterOn = true;
+        ActiveScore();
     }
+
+    public void ActiveScore()
+        {
+        score.SetActive(true);
+        }
 
     public void Reset() {
         foreach(Transform child in go_rooms.transform) {

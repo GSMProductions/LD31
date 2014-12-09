@@ -8,6 +8,8 @@ public class MouseManager : MonoBehaviour {
     public ShipBehavior ship;
     private Vector3 mousePosition_initial;
 
+    public Color colorOver;
+
     const float LEFTANGLE = -90f;
     const float RIGHTANGLE = 90f;
 
@@ -21,6 +23,16 @@ public class MouseManager : MonoBehaviour {
     public void RoomClicked(RoomBehavior room) {
         if (enabled)
             ship.hero.roomClicked = room;
+    }
+
+    public void RoomOver(RoomBehavior room) {
+        if(enabled){
+            room.go_sprite.GetComponent<SpriteRenderer>().color = colorOver;}
+
+    }
+
+    public void RoomExit(RoomBehavior room) {
+        if(enabled) {room.go_sprite.GetComponent<SpriteRenderer>().color = Color.white;}
     }
 
 	// Update is called once per frame

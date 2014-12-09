@@ -161,6 +161,14 @@ public class RoomBehavior : MonoBehaviour {
         GameObject.Find("System").GetComponent<MouseManager>().RoomClicked(this);
     }
 
+    public void OnMouseOver() {
+        GameObject.Find("System").GetComponent<MouseManager>().RoomOver(this);
+    }
+    
+    public void OnMouseExit() {
+        GameObject.Find("System").GetComponent<MouseManager>().RoomExit(this);
+    }
+
     public void AddPickup() {
         //add pickup
         GameObject go_pickup =  PickupBehavior.GivePickup();

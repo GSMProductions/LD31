@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_rooms: {fileID: 0}
+  score: {fileID: 1068521040}
 --- !u!114 &427345590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drag_length: 20
   ship: {fileID: 0}
+  colorOver: {r: .882352948, g: .395761251, b: .395761251, a: 1}
 --- !u!1 &564607094
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,7 +1367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1068521041
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1722,6 +1724,14 @@ Prefab:
     - target: {fileID: 11400004, guid: e98a9d76848ce2045aeadfafe2c4a9ff, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: e98a9d76848ce2045aeadfafe2c4a9ff, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: e98a9d76848ce2045aeadfafe2c4a9ff, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e98a9d76848ce2045aeadfafe2c4a9ff, type: 2}

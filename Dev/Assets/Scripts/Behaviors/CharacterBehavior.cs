@@ -11,6 +11,7 @@ public class CharacterBehavior : MonoBehaviour {
     public ShipBehavior ship;
 
     public Vector3 deltaRotation = Vector3.zero;
+    public float angleInitial = 0f;
 
     public float moveTolerance = 0.1f;
 
@@ -43,12 +44,24 @@ public class CharacterBehavior : MonoBehaviour {
         transform.parent = null;
         deltaRotation.x = transform.position.x - room.transform.position.x;
         deltaRotation.y = transform.position.y - room.transform.position.y;
+        angleInitial = ship.transform.rotation.eulerAngles.z;
     }
 
     public void RotationDesactivate() {
+        Vector3 newPosition = room.transform.position;
+        newPosition.z =  transform.position.z;
+        float angle = -Mathf.PI /180f * (ship.transform.rotation.eulerAngles.z - angleInitial);
+
+        float dx = Mathf.Cos(angle) * deltaRotation.x + Mathf.Sin(angle) * deltaRotation.y;
+        float dy = -1 * Mathf.Sin(angle) * deltaRotation.x + Mathf.Cos(angle) * deltaRotation.y;
+
+        newPosition.x += dx;
+        newPosition.y += dy;
+
         onRotation = false;
         transform.parent = room.transform;
         deltaRotation = Vector3.zero;
+        angleInitial = 0f;
     }
 
     public void DropActivate() {
@@ -64,8 +77,13 @@ public class CharacterBehavior : MonoBehaviour {
 
     public void PositionOnRoom(Vector3 newPosition) {
         newPosition.z =  transform.position.z;
-        newPosition.x += deltaRotation.x;
-        newPosition.y += deltaRotation.y;
+        float angle = -Mathf.PI /180f * (ship.transform.rotation.eulerAngles.z - angleInitial);
+
+        float dx = Mathf.Cos(angle) * deltaRotation.x + Mathf.Sin(angle) * deltaRotation.y;
+        float dy = -1 * Mathf.Sin(angle) * deltaRotation.x + Mathf.Cos(angle) * deltaRotation.y;
+
+        newPosition.x += dx;
+        newPosition.y += dy;
 
         transform.position = newPosition;
     }
